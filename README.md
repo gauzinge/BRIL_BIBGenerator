@@ -1,5 +1,5 @@
 # BRIL_BIBGenerator
->IN PROGRESS
+>UNDER CONSTRUCTION
 ### Introduction
  This guide gives instructions on setting up and running Beam Induced Background (BIB, alternatively MIB for Machine Induced Background) simulations with a two step method (BIB particle generation + simulation).
 Link to CMSSW offline workbook: 

@@ -6,11 +6,11 @@ For an official introduction and manual for CMSSW have a look at the offline wor
 https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBook
 
 ## Setup
-Login to _lxplus_. <br>
+Login to _lxplus_.
 ```sh
 ssh -Y username@lxplus.cern.ch
 ```
-If you don't have any CMSSW release already, navigate to an empty directory with and then type <br>
+If you don't have any CMSSW release already, navigate to an empty directory with and then type
 ```sh
 cmsrel CMSSW_11_2_0_pre6
 ````
@@ -18,23 +18,26 @@ which creates a local copy of CMSSW version 11.2.pre6. To find out about a list 
 ```sh
 scram list -a
 ```
-or visit the official [CMSSW github](https://github.com/cms-sw/cmssw) page, where you can also browse the simulation source code. Now you can navigate to the source directory within the created CMSSW release <br>
+or visit the official [CMSSW github](https://github.com/cms-sw/cmssw) page, where you can also browse the simulation source code. Now you can navigate to the source directory within the created CMSSW release
 ```sh
 cd CMSSW_11_2_0_pre6/src
 ```
-and activate a CMSSW working environment, paths and compiler (while being in the /src directory) by typing <br>
+and activate a CMSSW working environment, paths and compiler (while being in the /src directory) by typing
 ```sh
 cmsenv
 ```
-This command has to be issued only once but every time you open up a new terminal an start to wotk with CMSSW. In the _/src_ directory you can now clone the current repository that will be used for BIB generation: <br>
+This command has to be issued only once but every time you open up a new terminal an start to wotk with CMSSW. In the _/src_ directory you can now clone the current repository that will be used for BIB generation:
 ```sh
 git clone https://github.com/pkicsiny/BRIL_BIBGenerator.git
 ```
-CMSSW can only find and work with the code if it is located in the /src directory. Therefore the subdirectory BRIL_BIBGenerator/GeneratorInterface should be symlinked from the _/src_ directory as shown below: <br>
+CMSSW can only find and work with the code if it is located in the /src directory. Therefore the subdirectory BRIL_BIBGenerator/GeneratorInterface should be symlinked from the _/src_ directory as shown below:
 ```sh
 ln -s BRIL_BIBGenerator/GeneratorInterface GeneratorInterface
 ```
-In addition, you will need to get another repository that contains two config files which will be used to run the generation and simulation step respectively, located at `BIBGeneration/python/`. <br>
+In addition, you will need to clone another repository that contains two config files which will be used to run the generation and simulation step respectively. This can be found [here](https://github.com/pkicsiny/BRIL_ITsim/tree/master/BIBGeneration). You can simply clone the whole repository but we will need only the contents of the _BIBGeneration_ directory. Type the following while being in the _/src_ directory:
+```sh
+git clone https://github.com/pkicsiny/BRIL_ITsim.git
+```
 The cofig file BH_generation.py launches the generation step by invoking code from 
 ```sh
 BRIL_BIBGenerator/GeneratorInterface/BeamHaloGenerator/python/MIB_generator_cff.py

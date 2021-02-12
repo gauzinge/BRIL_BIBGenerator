@@ -48,12 +48,17 @@ Before running the generation step, you might want to have a look at the contenc
 cd BRIL_ITsim/BIBGeneration
 vi python/BH_generation.py
 ```
-(You might use the tab key for auto-filling the path name when navigating in the terminal.) Inside the config file there are some user parameters that you can change, specific to the usecase: <br>
-__nEvents__: number of events to read from the FLUKA input files. <br>
-__nThreads__: number of parallel computing threads to use. <br>
-__jobId__: relevant when running the generation step on lxbatch, where the simulation is split into smaller chunks each having a unique job ID. Not used if the code is run locally on lxplus. <br>
-__outputDirectory__: absolute path of the diractory to where the output root file will be created. It will contain the same particles as in the FLUKA dumnp input, but in a different, CMSSW friendly format, called [HEPMC](http://www.t2.ucsd.edu/twiki2/bin/view/HEPProjects/HepMCReference). <br>
-__inputPath__: absolute path specifying the location of the FLUKA input files. The line _options.inputFiles= [inputPath + "/" + f for f in os.listdir(inputPath) if f[:3] == "run"]_ automatically parses the file names in the __inputPath__ directory and selects files whose name begins with _run_. This parsing can also be adapted or removed depending on the specific usecase. The output file name can be changed under the _#specify output name_ comment.  <br>
+(You might use the tab key for auto-filling the path name when navigating in the terminal.) The config file accepts the following user parameters from the command line: <br>
+__nEvents__: number of events to read from the FLUKA input files. Can be set inside the config file through the _nevents_ variable. If set to -1, all events from the inputs will be processed. Note that this is not recommended as CMSSW will throw an error when reaching the end of the last file. Instead, it is recommended to check the number of events input file beforehand and set this parameter accordingly, e.g. to 10000 if the inputs contain let's say 10426 events. <br>
+__nThreads__: number of parallel computing threads to use. Default is 1. <br>
+__jobId__: relevant when running the generation step on lxbatch, where the simulation is split into smaller chunks each having a unique job ID. Not used if the code is run locally on lxplus. Default is 0. <br>
+__tDirectory__: absolute path of the diractory to where the root file will be created. It will contain the same particles as in the FLUKA dump input, but in a different, CMSSW friendly format, called [HEPMC](http://www.t2.ucsd.edu/twiki2/bin/view/HEPProjects/HepMCReference). <br>
+
+In addition, some other parameters can be specified inside the config file: <br>
+__inputPath__: absolute path specifying the location of the FLUKA input files. The line _options.inputFiles= [inputPath + "/" + f for f in os.listdir(inputPath) if f[:3] == "run"]_ automatically parses the file names in the __inputPath__ directory and selects files whose name begins with _run_. This parsing can also be adapted or removed depending on the specific usecase. <br>
+__nevents__: number of events, alternative hard-coded variant of __nEvents__. <br>
+The output file name can be changed under the _#specify output name_ comment. <br>
+
 Although the CMS geometry plays no role in the generation step, CMSSW always expects an input geometry to be specified. You can use the most up to date Phase 2 full CMS geometry, just as a 'placeholder':
 ```sh
 process.load('Configuration.Geometry.GeometryExtended2026D63_cff')

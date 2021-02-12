@@ -1,8 +1,8 @@
 # BRIL_BIBGenerator
 >UNDER CONSTRUCTION
 ### Introduction
- This guide gives instructions on setting up and running Beam Induced Background (BIB, alternatively MIB for Machine Induced Background) simulations with a two step method (BIB particle generation + simulation).
-Link to CMSSW offline workbook: 
+This guide gives instructions on how to set up and run Beam Induced Background (BIB, alternatively MIB for Machine Induced Background) simulations in CMSSW with a two step method (BIB particle generation + simulation).
+For an official introduction and manual for CMSSW have a look at the offline workbook: 
 https://twiki.cern.ch/twiki/bin/view/CMSPublic/WorkBook
 
 ## Setup
@@ -10,25 +10,27 @@ Login to _lxplus_. <br>
 ```sh
 ssh -Y username@lxplus.cern.ch
 ```
-Navigate to a directory where you want CMSSW to be located, then type <br>
-`cmsrel CMSSW_11_2_0_pre6` (or any other verison)
-To find out about a list of currently available CMSSW releases:
+If you don't have any CMSSW release already, navigate to an empty directory with and then type <br>
+```sh
+cmsrel CMSSW_11_2_0_pre6
+````
+which creates a local copy of CMSSW version 11.2.pre6. To find out about a list of currently available CMSSW releases, type
 ```sh
 scram list -a
 ```
-Navigate to the source directory. <br>
+or visit the official [CMSSW github](https://github.com/cms-sw/cmssw) page, where you can also browse the simulation source code. Now you can navigate to the source directory within the created CMSSW release <br>
 ```sh
-cd CMSSW_10_2_18/src
+cd CMSSW_11_2_0_pre6/src
 ```
-Activate a CMSSW working environment, paths and compiler (while being in the /src directory): <br>
+and activate a CMSSW working environment, paths and compiler (while being in the /src directory) by typing <br>
 ```sh
 cmsenv
 ```
-In the /src directory you can clone the current repository that will be used for BIB generation: <br>
+This command has to be issued only once but every time you open up a new terminal an start to wotk with CMSSW. In the _/src_ directory you can now clone the current repository that will be used for BIB generation: <br>
 ```sh
 git clone https://github.com/pkicsiny/BRIL_BIBGenerator.git
 ```
-By default, CMSSW can only find and work with the code if it is located in the /src directory. Therefore the subdirectory BRIL_BIBGenerator/GeneratorInterface should be symlinked from the /src directory as shown below: <br>
+CMSSW can only find and work with the code if it is located in the /src directory. Therefore the subdirectory BRIL_BIBGenerator/GeneratorInterface should be symlinked from the _/src_ directory as shown below: <br>
 ```sh
 ln -s BRIL_BIBGenerator/GeneratorInterface GeneratorInterface
 ```

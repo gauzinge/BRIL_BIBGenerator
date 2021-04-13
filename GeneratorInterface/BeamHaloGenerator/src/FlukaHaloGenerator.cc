@@ -258,7 +258,7 @@ int FlukaHaloGenerator::readEvent(std::vector<BeamHaloParticle> *beamHaloEvent)
 			{	
 				std::cout << "No more files, break loop." << std::endl;
 				//endOfFile = true;
-				return -1;
+				return 0;
 				//continue;
 			}
 			
@@ -266,7 +266,7 @@ int FlukaHaloGenerator::readEvent(std::vector<BeamHaloParticle> *beamHaloEvent)
 			if(m_inputs->open(m_fileIndex) != 0)
       			{
                 		std::cout << "Can't open FLUKA input file " << m_inputFiles[m_fileIndex] << " at list index " << m_fileIndex << " ... " << std::endl;
-                		return -1;
+                		return 0;
       			}
 
        			std::cout << "Reading FLUKA file" << m_inputFiles[m_fileIndex] << " ... " << std::endl;	
